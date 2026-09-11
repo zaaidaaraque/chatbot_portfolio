@@ -58,4 +58,71 @@ El sistema **recupera** los fragmentos más relevantes de mis proyectos (README 
  
 >Se usa exclusivamente niveles gratuitos (Gemini API, ChromaDB local, GitHub Actions, Render Free).
 
- 
+
+---
+
+# RAG Chatbot for My GitHub Portfolio
+
+A chatbot that answers questions about my own public GitHub projects using **Retrieval-Augmented Generation (RAG)**.
+
+**Chatbot:** [chatbot-portfolio-co0v.onrender.com](https://chatbot-portfolio-co0v.onrender.com)
+
+*(The free Render plan puts the service to sleep after 15 minutes of inactivity, so the first visit may take a few seconds to load.)*
+
+---
+
+## Repository Structure
+
+```text
+chatbot_portfolio/
+├── app/
+│   ├── main.py                  # FastAPI: serves the frontend + /api/ask endpoint
+│   └── rag.py                   # Retrieval + generation logic
+├── static/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+├── chroma_db/                   # Pre-generated vector index
+├── RAG_chatbot_portfolio.ipynb  # Exploration and initial indexing notebook
+├── sync_index.py                # Index synchronization script (used by GitHub Actions)
+├── requirements.txt
+```
+
+## Pipeline
+
+The system **retrieves** the most relevant chunks from my projects (README files + notebooks) and uses an LLM to generate a response grounded in that information. It also provides the source project for each answer, including a direct link to the corresponding repository.
+
+### 1. Indexing (`Portfolio_RAG_Chatbot.ipynb` / `sync_index.py`)
+
+- All my public GitHub repositories are retrieved through the GitHub API.
+- For each repository, the README and notebook content are extracted. From notebooks, only **Markdown cells and imported libraries** from code cells are included, as the remaining code content can introduce unnecessary noise.
+- The text is split into **chunks by section**, preserving Markdown headings instead of splitting it based on a fixed character or token size.
+- Each chunk is converted into a vector (**embedding**) using the free **Google Gemini API**.
+- The embeddings are stored in **ChromaDB**, a local persistent vector database.
+
+### 2. Query (`FastAPI app`)
+
+- The user's question is converted into an embedding as well.
+- The `k` most similar chunks are retrieved from ChromaDB (**retrieval**).
+- The retrieved chunks and the user's question are passed to Gemini, which generates the final response (**generation**).
+- The sources used to generate the answer are also returned, including a link to the corresponding repository.
+
+### 3. Automation (`GitHub Actions`)
+
+- A scheduled workflow periodically runs `sync_index.py`.
+- The script compares the hash of each README/notebook with the version already indexed and only reprocesses content that has changed.
+- This keeps the index up to date automatically, without requiring manual re-indexing whenever I update a project.
+
+## Technical Stack
+
+| Component | Technology |
+|---|---|
+| Embeddings | Google Gemini (`gemini-embedding-001`) |
+| Response Generation | Google Gemini (`gemini-3.6-flash`) |
+| Vector Database | ChromaDB |
+| Backend | FastAPI |
+| Frontend | HTML / CSS / Vanilla JavaScript |
+| Automation | GitHub Actions (cron) |
+| Deployment | Render |
+
+> **Free-tier technologies only:** Gemini API, local ChromaDB, GitHub Actions, and Render Free.
