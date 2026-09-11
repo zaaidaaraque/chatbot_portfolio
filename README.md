@@ -3,7 +3,7 @@
 Un chatbot que responde preguntas sobre mis propios proyectos públicos en GitHub, usando **Retrieval-Augmented Generation (RAG)**.
  
 **Enlace al Chatbot:** [chatbot-portfolio-co0v.onrender.com](https://chatbot-portfolio-co0v.onrender.com)
-*(el plan gratuito de Render duerme el servicio tras 15 min de inactividad, por lo que la primera visita puede tardar unos segundos en cargar)*
+*(el plan gratuito de Render apaga el servicio tras 15 min de inactividad, por lo que la primera visita puede tardar unos segundos en cargar)*
  
 ---
 ## Estructura del repositorio
