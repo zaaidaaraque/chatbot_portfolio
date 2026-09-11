@@ -21,7 +21,6 @@ chatbot_portfolio/
 ├── RAG_chatbot_portfolio.ipynb  # Notebook de exploración e indexación inicial
 ├── sync_index.py                # Script de sincronización (usado por GitHub Actions)
 ├── requirements.txt
-└── .github/workflows/update_index.yml
 ```
 
  
