@@ -56,21 +56,6 @@ El sistema **recupera** los fragmentos más relevantes de mis proyectos (README 
 | Automatización | GitHub Actions (cron) |
 | Despliegue | Render |
  
-**100% gratuito**: usa exclusivamente niveles gratuitos (Gemini API, ChromaDB local, GitHub Actions, Render Free).
+>Se usa exclusivamente niveles gratuitos (Gemini API, ChromaDB local, GitHub Actions, Render Free).
 
- 
-## Ejecutarlo en local
- 
-```bash
-git clone https://github.com/zaaidaaraque/chatbot_portfolio.git
-cd chatbot_portfolio
-pip install -r requirements.txt
-cp .env.example .env   # y añade tu propia GEMINI_API_KEY
-uvicorn app.main:app --reload
-```
- 
-Abre `http://127.0.0.1:8000` en el navegador.
- 
-> En este caso, necesitas tu propia API key gratuita de [Google AI Studio](https://aistudio.google.com/app/apikey) para ejecutarlo.
-> El token de GitHub es opcional pero recomendable por el límite. 
  
