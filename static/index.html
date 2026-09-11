@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chatbot Portfolio Zaida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<div class="drawer-rail" aria-hidden="true">
+  <div class="rail-label">A&nbsp;–&nbsp;Z</div>
+  <div class="rail-label">DATA SCIENCE</div>
+  <div class="rail-label">2025&nbsp;–&nbsp;2026</div>
+</div>
+
+<main class="catalog">
+  <header class="catalog-header">
+    <p class="catalog-eyebrow">Chatbot Portfolio</p>
+    <h1>Haz una pregunta sobre los proyectos</h1>
+    <p class="catalog-sub">Un índice consultable de mis proyectos públicos en GitHub.</p>
+  </header>
+
+  <form id="ask-form" class="search-drawer">
+    <label for="question" class="drawer-label">Consulta</label>
+    <div class="drawer-body">
+      <input
+        type="text"
+        id="question"
+        name="question"
+        placeholder="¿Qué proyectos de NLP has hecho y qué técnicas usaste?"
+        autocomplete="off"
+        required
+      />
+      <button type="submit" id="submit-btn">Buscar</button>
+    </div>
+  </form>
+
+  <section id="results" class="results" aria-live="polite"></section>
+</main>
+
+<template id="card-template">
+  <article class="card">
+    <div class="card-question"></div>
+    <div class="card-divider"></div>
+    <div class="card-answer"></div>
+    <footer class="card-refs">
+      <span class="refs-label">Fuentes</span>
+      <ul class="refs-list"></ul>
+    </footer>
+  </article>
+</template>
+
+<template id="loading-template">
+  <article class="card card--loading">
+    <div class="stamp">CONSULTANDO</div>
+    <p>Recorriendo el fichero…</p>
+  </article>
+</template>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
